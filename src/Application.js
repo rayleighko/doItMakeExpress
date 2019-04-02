@@ -2,6 +2,7 @@ const http = require('http');
 const path = require('path');
 const fs = require('fs');
 const debug = require('../utils/debug')('Application');
+const serveStatic = require('./serveStatic')
 
 const mimeType = {
 	'.ico': 'image/x-icon',
@@ -16,26 +17,18 @@ const mimeType = {
 
 const Application = () => {
 	const _server = http.createServer((req, res) => {
+		serveStatic(req, res)
 
-		const ext = path.parse(req.url).ext;
-		const publicPath = path.join(__dirname, '../public')
+		res.statusCode = 200;
+		res.setHeader('Content-Type', 'text/html');
 
-		if (Object.keys(mimeType).includes(ext)) {
-			fs.readFile(`${publicPath}${req.url}`, (err, data) => {
-				if (err) {
-					res.statusCode = 404;
-					res.end('Not found');
-				} else {
-					res.statusCode = 200
-					res.setHeader('Content-Type', mimeType[ext]);
-					res.end(data)
-				}
-			})
-		} else {
-			res.statusCode = 200;
-		}
+		const filePath = path.join(__dirname, '../public/index.html')
+		fs.readFile(filePath, (err, data) => {
+			if (err) throw err;
+
+			res.end(data);
+		})
 	});
-
 
 	const listen = (port = 3000, hostname = '127.0.0.1', fn) => {
 		_server.listen(port, hostname, fn)
