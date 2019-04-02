@@ -1,7 +1,9 @@
-const app  = require('./app');
-const hostname = '127.0.0.1'
-const port = 3000
+const app  = require('./src/app');
+const debug = require('./utils/debug')('bin');
+
+const hostname = '127.0.0.1';
+const port = 3000;
 
 app.listen(port, hostname, () => {
-	console.log(`Server running at http://${hostname}:${port}/`);
+	debug(`Server running at http://${hostname}:${port}/`);
 });

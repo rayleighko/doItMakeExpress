@@ -1,4 +1,5 @@
 const http = require('http')
+const debug = require('../utils/debug')('Application')
 
 const Application = () => {
 	const _server = http.createServer((req, res) => {
@@ -6,8 +7,10 @@ const Application = () => {
 		res.setHeader('Content-Type', 'text/plain');
 		res.end('Hello World\n');
 	});
+
 	const listen = (port = 3000, hostname = '127.0.0.1', fn) => {
 		_server.listen(port, hostname, fn)
+		debug('server is listening')
 	}
 
 	return {
@@ -16,4 +19,4 @@ const Application = () => {
 	}
 }
 
-module.exports = Application
+module.exports = Application;
