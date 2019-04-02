@@ -1,6 +1,5 @@
-const app  = require('./src/app');
 const debug = require('./utils/debug')('bin');
-
+const app = require('./app');
 const hostname = '127.0.0.1';
 const port = 3000;
 
