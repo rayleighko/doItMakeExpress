@@ -1,12 +1,13 @@
 const debug = require('../utils/debug')('Application')
 const http = require('http')
 const Middleware = require('./Middleware')
+const Response = require('./Response')
 
 const Application = () => {
-	const _middleware = Middleware();
+	const _middleware = Middleware()
 
 	const _server = http.createServer((req, res) => {
-		_middleware.run(req, res)
+		_middleware.run(req, Response(res)) // Response 객체로 교체
 	})
 
 	const use = (path, fn) => {
@@ -15,7 +16,7 @@ const Application = () => {
 		} else if (typeof path == 'function') {
 			fn = path
 		} else {
-			throw Error('Usage: use(path, fn) or use(fn)');
+			throw Error('Usage: use(path, fn) or use(fn)')
 		}
 
 		_middleware.add(fn)

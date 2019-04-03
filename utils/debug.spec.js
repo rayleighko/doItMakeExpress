@@ -38,7 +38,7 @@ describe('debug', () => {
 
 			debug(msg)
 
-			sinon.assert.called(console.log(expected))
+			sinon.assert.called(console.log)
 		});
 	});
 });

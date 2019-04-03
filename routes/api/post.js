@@ -5,8 +5,7 @@ const posts = [
 ]
 
 const index = () => (req, res, next) => {
-	res.setHeader('Content-Type', 'application/json')
-	res.end(JSON.stringify(posts))
+	res.status(200).json(posts);
 }
 
 module.exports = {
