@@ -3,7 +3,6 @@ const fs = require('fs')
 const debug = require('../utils/debug')('serve-static')
 
 const serveStatic = () => (req, res, next) => {
-	debug(req)
 	const mimeType = {
 		'.ico': 'image/x-icon',
 		'.html': 'text/html',
