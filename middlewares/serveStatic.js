@@ -1,6 +1,6 @@
-const path = require('path');
-const fs = require('fs');
-const debug = require('../utils/debug')('serve-static');
+const path = require('path')
+const fs = require('fs')
+const debug = require('../utils/debug')('serve-static')
 
 const serveStatic = () => (req, res, next) => {
 	debug(req)
@@ -13,25 +13,26 @@ const serveStatic = () => (req, res, next) => {
 		'.jpg': 'image/jpeg',
 		'.eot': 'appliaction/vnd.ms-fontobject',
 		'.ttf': 'aplication/font-sfnt'
-	};
-	const ext = path.parse(req.url).ext;
-	const publicPath = path.join(__dirname, '../public');
-	debug(`ext: ${ext}`);
+	}
+
+	const ext = path.parse(req.url).ext
+	const publicPath = path.join(__dirname, '../public')
+	debug(`ext: ${ext}`)
 
 	if (Object.keys(mimeType).includes(ext)) {
 		fs.readFile(`${publicPath}${req.url}`, (err, data) => {
 			if (err) {
-				res.statusCode = 404;
-				res.end('Not found');
+				res.statusCode = 404
+				res.end('Not found')
 			} else {
-				res.statusCode = 200;
-				res.setHeader('Content-Type', mimeType[ext]);
-				res.end(data);
+				res.statusCode = 200
+				res.setHeader('Content-Type', mimeType[ext])
+				res.end(data)
 			}
-		});
+		})
 	} else {
-		next();
+		next()
 	}
-};
+}
 
-module.exports = serveStatic;
+module.exports = serveStatic

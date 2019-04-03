@@ -4,8 +4,9 @@ const colors = [
 	{name: 'red',      value: '\x1b[31m'},
 	{name: 'green',    value: '\x1b[32m'},
 	{name: 'magenta',  value: '\x1b[35m'},
-];
-const resetColor = '\x1b[0m';
+]
+
+const resetColor = '\x1b[0m'
 
 const debug = (tag) => {
 	if(!tag) throw Error("tag should be required!")
@@ -14,10 +15,10 @@ const debug = (tag) => {
 	const color = colors[randIdx]
 
 	return msg => {
-		const logString = `${color.value}[${tag}]${resetColor} ${msg}`;
-		console.log(logString);
+		const logString = `${color.value}[${tag}]${resetColor} ${msg}`
+		console.log(logString)
 
-		return logString;
+		return logString
 	}
 }
 

@@ -1,4 +1,3 @@
-
 (() => {
 	const onload = () => {
 		console.log('js is loaded')

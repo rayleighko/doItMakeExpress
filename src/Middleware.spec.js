@@ -32,7 +32,7 @@ describe('Middleware', () => {
 			const stub = {
 				mw1() {},
 				mw2() {}
-			};
+			}
 			sinon.stub(stub, 'mw1').callsFake((req, res, next) => next());
 			sinon.stub(stub, 'mw2').callsFake((req, res, next) => next());
 
@@ -66,13 +66,13 @@ describe('Middleware', () => {
 			]
 			fns.forEach(fn => middleware.add(fn));
 
-			middleware.run();
+			middleware.run()
 
 			fns.forEach((fn, idx) => {
 				const shouldInvoked = idx < 2
 				should(fn.called).be.equal(shouldInvoked)
-			});
-		});
+			})
+		})
 
 		it('에러 발생시 에러 미들웨어만 실행한다', () => {
 			const stub = {
@@ -80,7 +80,7 @@ describe('Middleware', () => {
 				mwWillThrow(req, res, next) {}, // 에러 발생 미들웨어
 				mw2(req, res, next) {},
 				mwWillCatchError(err, req, res, next) {} // 에러 처리 미들웨어
-			};
+			}
 			sinon.stub(stub, 'mw1').callsFake((req, res, next) => next());
 			sinon.stub(stub, 'mwWillThrow').callsFake((req, res, next) => next(Error()));
 			sinon.stub(stub, 'mw2').callsFake((req, res, next) => next());
@@ -99,7 +99,7 @@ describe('Middleware', () => {
 			fns.forEach((fn, idx) => {
 				const shouldInvoked = idx !== 2;
 				should(fn.called).be.equal(shouldInvoked)
-			});
+			})
 		})
 	})
-});
+})

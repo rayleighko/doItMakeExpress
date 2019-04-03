@@ -20,8 +20,8 @@ const logger = () => {
 		}
 
 		const log = `${coloredMethod(req.method)} ${req.url}`
-		console.log(log);
-		next();
+		console.log(log)
+		next()
 	}
 }
 
