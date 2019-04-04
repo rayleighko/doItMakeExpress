@@ -1,8 +1,7 @@
-const debug = require('./utils/debug')('bin')
-const app = require('./app')
-const hostname = '127.0.0.1'
-const port = 3000
+const debug = require('debug')('bin')
+const express = require('express')
+const app = express()
 
-app.listen(port, hostname, () => {
-	debug(`Server running at http://${hostname}:${port}/`)
-})
+debug('App is initiated')
+
+module.exports = app;

@@ -1,16 +1,16 @@
 const debug = require("./utils/debug")("app");
-const serveStatic = require("./middlewares/serveStatic");
-const logger = require("./middlewares/logger");
+const logger = require("morgan");
 const errors = require("./middlewares/errors");
 const index = require("./routes/index");
 const apiPost = require("./routes/api/post");
-const bodyParser = require("./middlewares/bodyParser");
+const bodyParser = require("body-parser");
 const App = require("./src/Application");
 const app = App();
 
-app.use(logger());
-app.use(serveStatic());
-app.use(bodyParser());
+app.use(logger("dev"));
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use("/", index.listPosts());
 app.get("/api/posts", apiPost.index());
 app.post("/api/posts", apiPost.create());
