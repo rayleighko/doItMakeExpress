@@ -29,10 +29,12 @@ const Middleware = () => {
       return isNextErrorMw ? nextMw(err, _req, _res, next) : _run(i + 1, err);
     }
 
-    if (nextMw._path) {
-      const pathMatched = _req.path === nextMw._path; // 경로만 체크
-      return pathMatched ? nextMw(_req, _res, next) : _run(i + 1);
-    }
+	if (nextMw._path) {
+		const pathMatched = _req.path === nextMw._path &&
+		  _req.method.toLowerCase() === (nextMw._method || 'get');
+	
+		return pathMatched ? nextMw(_req, _res, next) : _run(i + 1)
+	  }
 
     nextMw(_req, _res, next);
   };
